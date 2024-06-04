@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.wanderlei.movieapp.ui.theme.white
 
 @Composable
-fun GenreTag(
+fun MovieDetailGenreTag(
     genre: String
 ) {
     Box(
@@ -37,6 +37,6 @@ fun GenreTag(
 
 @Preview(showBackground = true, backgroundColor = 0)
 @Composable
-private fun GenreTagPreview() {
-    GenreTag(genre = "Aventura")
+private fun MovieDetailGenreTagPreview() {
+    MovieDetailGenreTag(genre = "Aventura")
 }
