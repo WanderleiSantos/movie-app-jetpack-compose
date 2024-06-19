@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.wanderlei.movieapp.ui.theme.black
 import com.wanderlei.movieapp.ui.theme.white
 
 @Composable
@@ -38,5 +39,5 @@ fun MovieDetailGenreTag(
 @Preview(showBackground = true, backgroundColor = 0)
 @Composable
 private fun MovieDetailGenreTagPreview() {
-    MovieDetailGenreTag(genre = "Aventura")
+    MovieDetailGenreTag(genre = "Ação")
 }
