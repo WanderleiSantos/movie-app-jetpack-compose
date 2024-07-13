@@ -189,7 +189,7 @@ fun MovieDetailContent(
             pagingMoviesSimilar = pagingMoviesSimilar,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()
+                .fillMaxHeight(0.35f)
                 .align(Alignment.BottomEnd)
         )
 
