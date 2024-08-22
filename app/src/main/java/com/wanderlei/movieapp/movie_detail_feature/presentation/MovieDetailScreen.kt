@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.wanderlei.movieapp.R
+import com.wanderlei.movieapp.core.domain.model.Movie
 import com.wanderlei.movieapp.movie_detail_feature.presentation.components.MovieDetailContent
 import com.wanderlei.movieapp.movie_detail_feature.presentation.state.MovieDetailState
 import com.wanderlei.movieapp.ui.theme.black
@@ -19,6 +20,8 @@ import com.wanderlei.movieapp.ui.theme.white
 fun MovieDetailScreen(
     id: Int?,
     uiState: MovieDetailState,
+    onAddFavorite: (Movie) -> Unit,
+    checkedFavorite: (MovieDetailEvent.CheckedFavorite) -> Unit,
     getMovieDetail: (MovieDetailEvent.GetMovieDetail) -> Unit
 ) {
     val pagingMoviesSimilar = uiState.results.collectAsLazyPagingItems()
@@ -26,6 +29,7 @@ fun MovieDetailScreen(
     LaunchedEffect(key1 = true) {
         if (id != null) {
             getMovieDetail(MovieDetailEvent.GetMovieDetail(id))
+            checkedFavorite(MovieDetailEvent.CheckedFavorite(id))
         }
     }
 
@@ -45,7 +49,7 @@ fun MovieDetailScreen(
                 isLoading = uiState.isLoading,
                 isError = uiState.error,
                 iconColor = uiState.iconColor,
-                onAddFavorite = {}
+                onAddFavorite = { movie -> onAddFavorite(movie) }
             )
         }
     )
