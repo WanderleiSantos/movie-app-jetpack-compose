@@ -10,6 +10,8 @@ import androidx.navigation.navArgument
 import com.wanderlei.movieapp.core.util.Constants
 import com.wanderlei.movieapp.movie_detail_feature.presentation.MovieDetailScreen
 import com.wanderlei.movieapp.movie_detail_feature.presentation.MovieDetailViewModel
+import com.wanderlei.movieapp.movie_favorite_feature.presentation.MovieFavoriteScreen
+import com.wanderlei.movieapp.movie_favorite_feature.presentation.MovieFavoriteViewModel
 import com.wanderlei.movieapp.movie_popular_feature.presentation.MoviePopularScreen
 import com.wanderlei.movieapp.movie_popular_feature.presentation.MoviePopularViewModel
 import com.wanderlei.movieapp.search_movie_feature.presentation.MovieSearchEvent
@@ -47,7 +49,11 @@ fun NavigationGraph(navController: NavHostController) {
             )
         }
         composable(BottomNavItem.MovieFavorite.route) {
-
+            val viewModel: MovieFavoriteViewModel = hiltViewModel()
+            val uiState = viewModel.uiState
+            MovieFavoriteScreen(uiState = uiState, navigateToDetailMovie = {
+                navController.navigate(BottomNavItem.MovieDetail.passMovieId(movieId = it))
+            })
         }
 
         composable(
