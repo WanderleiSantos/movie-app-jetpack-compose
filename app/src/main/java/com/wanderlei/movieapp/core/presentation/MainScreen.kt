@@ -8,14 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.wanderlei.movieapp.core.presentation.navigation.BottomNavigationBar
+import com.wanderlei.movieapp.core.presentation.navigation.DetailScreenNav
 import com.wanderlei.movieapp.core.presentation.navigation.NavigationGraph
+import com.wanderlei.movieapp.core.presentation.navigation.currentRoute
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(navController: NavHostController) {
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(navController = navController)
+            if (currentRoute(navController = navController) != DetailScreenNav.DetailScreen.route) {
+                BottomNavigationBar(navController = navController)
+            }
         },
         content = { paddingValues ->
             Box(
