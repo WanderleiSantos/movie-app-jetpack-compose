@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import com.wanderlei.movieapp.R
+import com.wanderlei.movieapp.core.presentation.components.common.AsyncImageUrl
 
 @Composable
 fun MovieDetailBackdropImage(
@@ -19,16 +16,11 @@ fun MovieDetailBackdropImage(
     modifier: Modifier
 ) {
     Box(modifier = modifier) {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(backdropImageUrl)
-                .crossfade(true)
-                .error(R.drawable.ic_error_image)
-                .placeholder(R.drawable.ic_placeholder)
-                .build(),
-            contentDescription = "",
+        AsyncImageUrl(
+            imageUrl = backdropImageUrl,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
         )
     }
 }
