@@ -48,7 +48,7 @@ fun SearchComponent(
         },
         keyboardOptions = KeyboardOptions.Default.copy(
             capitalization = KeyboardCapitalization.Sentences,
-            autoCorrect = true,
+            autoCorrectEnabled = true,
             keyboardType = KeyboardType.Text,
             imeAction = ImeAction.Search
         ),
