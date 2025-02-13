@@ -89,6 +89,10 @@ dependencies {
     androidTestImplementation(libs.mockito.android)
     testImplementation(libs.mockito.inline)
 
+
+    kspAndroidTest (libs.hilt.android.compiler)
+    androidTestImplementation (libs.androidx.core.testing)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
