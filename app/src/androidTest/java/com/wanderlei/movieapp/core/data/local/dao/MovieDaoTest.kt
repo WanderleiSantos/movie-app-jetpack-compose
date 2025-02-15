@@ -33,13 +33,13 @@ class MovieDaoTest {
     private lateinit var movieDao: MovieDao
 
     @Before
-    fun setup(){
+    fun setup() {
         hiltRule.inject()
         movieDao = database.movieDao()
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         database.close()
     }
 
@@ -84,5 +84,32 @@ class MovieDaoTest {
         assertThat(movie).isNotNull()
         assertThat(movie?.movieId).isEqualTo(5)
         assertThat(movie?.title).isEqualTo("Nome 5")
+    }
+
+    @Test
+    fun test_insertMovies_should_insert_movies_successfully() = runTest {
+        val moviesEntities = listOf(
+            MovieEntity(movieId = 1, title = "Nome 1", imageUrl = "url1"),
+            MovieEntity(movieId = 3, title = "Nome 3", imageUrl = "url3"),
+            MovieEntity(movieId = 5, title = "Nome 5", imageUrl = "url5"),
+            MovieEntity(movieId = 4, title = "Nome 4", imageUrl = "url4"),
+            MovieEntity(movieId = 2, title = "Nome 2", imageUrl = "url2")
+        )
+        movieDao.insertMovies(moviesEntities)
+        val insertedMovies = movieDao.getMovies().first()
+
+        assertThat(moviesEntities.size).isEqualTo(insertedMovies.size)
+        assertThat(insertedMovies.containsAll(moviesEntities))
+    }
+
+    @Test
+    fun test_insertMovie_should_insert_movie_successfully() = runTest {
+
+        val movieEntity = MovieEntity(movieId = 1, title = "Nome 1", imageUrl = "url1")
+
+        movieDao.insertMovie(movieEntity)
+        val insertedMovies = movieDao.getMovies().first()
+
+        assertThat(insertedMovies[0].movieId).isEqualTo(movieEntity.movieId)
     }
 }
