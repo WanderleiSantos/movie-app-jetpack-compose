@@ -1,6 +1,7 @@
 package com.wanderlei.movieapp.movie_popular_feature.presentation
 
 import androidx.paging.PagingData
+import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.whenever
 import com.wanderlei.movieapp.TestDispatcherRule
 import com.wanderlei.movieapp.core.domain.model.MovieFactory
@@ -14,7 +15,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import com.google.common.truth.Truth.assertThat
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -51,6 +51,14 @@ class MoviePopularViewModelTest {
         //Then
         assertThat(result).isNotNull()
 
+    }
+
+    @Test(expected = RuntimeException::class)
+    fun `must throw an exception when the calling to the use case returns an exception`() = runTest {
+        whenever(getPopularMoviesUseCase.invoke()).thenThrow(RuntimeException())
+
+          val result = viewModel.uiState.movies.first()
+            assertThat(result).isNull()
     }
 }
 
